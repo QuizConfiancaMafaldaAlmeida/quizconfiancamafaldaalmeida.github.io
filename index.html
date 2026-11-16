@@ -298,6 +298,9 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .autor img{width:72px;height:90px;object-fit:cover;object-position:50% 20%;border-radius:999px 999px 4px 4px}
 .autor p{font-size:.86rem;color:rgba(255,255,255,.62);line-height:1.55;max-width:70ch}
 .autor strong{display:block;color:#fff;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;margin-bottom:6px}
+.redes{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}
+.redes a{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding:6px 0;border-bottom:1px solid rgba(250,54,113,.5);transition:color .25s,border-color .25s}
+.redes a:hover{color:var(--rosa);border-color:var(--rosa)}
 .autor-rotulo{display:block;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rosa);font-weight:600;margin-bottom:6px}
 
 @media (min-width:900px){
@@ -515,7 +518,14 @@ em{font-style:italic;color:var(--rosa-escuro)}
 
       <div class="autor revela">
         <img id="fotoAutor" src="mafalda.jpg" alt="" loading="lazy">
-        <p><span class="autor-rotulo">Quem criou esta avaliação</span><strong id="nomeAutor"></strong><span id="bioAutor"></span></p>
+        <div>
+          <p><span class="autor-rotulo">Quem criou esta avaliação</span><strong id="nomeAutor"></strong><span id="bioAutor"></span></p>
+          <p class="redes" aria-label="Redes da Mafalda Almeida">
+            <a href="https://www.instagram.com/mafalda.ceo/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.youtube.com/@MafaldaAlmeidaceo" target="_blank" rel="noopener">YouTube</a>
+            <a href="https://www.linkedin.com/in/mafaldaalmeida/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
