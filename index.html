@@ -158,18 +158,18 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .voltar[hidden]{visibility:hidden;display:block}
 .contador{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suave);font-weight:500;font-variant-numeric:tabular-nums}
 .progresso{height:2px;background:var(--filete)}
-.progresso span{display:block;height:100%;width:0;background:var(--rosa);transition:width .6s var(--ease)}
+.progresso span{display:block;height:100%;width:100%;background:var(--rosa);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
 .pergunta{padding:clamp(36px,8vh,64px) 0 48px}
 .incentivo{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--rosa-escuro);margin-bottom:22px;min-height:0}
 .pergunta h2{margin-bottom:10px}
 .parte{margin-bottom:16px}
 .nota{font-size:.82rem;color:var(--tinta-suave);margin-bottom:6px}
 .opcoes{list-style:none;margin-top:28px;border-top:1px solid var(--filete)}
-.opcao{position:relative;display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--filete);padding:20px 8px 20px 26px;font-size:1rem;line-height:1.5;cursor:pointer;transition:background .25s,color .25s,padding .35s var(--ease);-webkit-tap-highlight-color:transparent}
+.opcao{position:relative;display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--filete);padding:20px 8px 20px 26px;font-size:1rem;line-height:1.5;cursor:pointer;transition:background .25s,color .25s;-webkit-tap-highlight-color:transparent}
 .opcao::before{content:"";position:absolute;left:4px;top:50%;width:10px;height:10px;margin-top:-5px;border:1px solid rgba(23,23,23,.35);border-radius:50%;transition:all .3s var(--ease)}
 @media (hover:hover){.opcao:hover{background:var(--papel-2)}}
-.opcao.escolhida{padding-left:34px;background:var(--papel-2)}
-.opcao.escolhida::before{background:var(--rosa);border-color:var(--rosa);left:10px}
+.opcao.escolhida{background:var(--papel-2)}
+.opcao.escolhida::before{background:var(--rosa);border-color:var(--rosa);transform:scale(1.2)}
 .opcao.escolhida::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--rosa)}
 .opcoes.bloqueada .opcao{pointer-events:none}
 .troca{animation:troca .55s var(--ease) both}
@@ -571,7 +571,7 @@ const pixel = (ev, data) => { if (window.fbq) fbq('track', ev, data || {}); };
 function desenhaPergunta(){
   const p = PERGUNTAS[atual];
   $("contador").textContent = (atual+1) + " / " + PERGUNTAS.length;
-  $("barraProg").querySelector("span").style.width = (atual / PERGUNTAS.length * 100) + "%";
+  $("barraProg").querySelector("span").style.transform = "scaleX(" + (atual / PERGUNTAS.length) + ")";
   $("barraProg").setAttribute("aria-valuenow", atual);
   $("btnVoltar").hidden = atual === 0;
   const inc = $("incentivo");
@@ -599,7 +599,7 @@ function escolhe(cod, botao){
   document.querySelectorAll(".opcao").forEach(o => o.classList.remove("escolhida"));
   botao.classList.add("escolhida");
   $("opcoes").classList.add("bloqueada");
-  $("barraProg").querySelector("span").style.width = ((atual+1) / PERGUNTAS.length * 100) + "%";
+  $("barraProg").querySelector("span").style.transform = "scaleX(" + ((atual+1) / PERGUNTAS.length) + ")";
   setTimeout(() => {
     if (atual < PERGUNTAS.length - 1){ atual++; desenhaPergunta(); }
     else { mostra("captura"); setTimeout(() => $("nome").focus({preventScroll:true}), 400); }
