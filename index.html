@@ -265,8 +265,8 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .perguntas-ti li{counter-increment:q;display:grid;grid-template-columns:40px 1fr;font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.6rem);line-height:1.3}
 .perguntas-ti li::before{content:counter(q,decimal-leading-zero);font-family:var(--sans);font-size:.75rem;font-weight:600;color:var(--rosa-escuro);padding-top:9px;letter-spacing:.08em}
 .nota-ti{margin-top:24px;font-size:.88rem;color:var(--tinta-suave)}
-.forca p{font-size:1.05rem;max-width:56ch}
-.forca p + p{margin-top:12px;color:var(--tinta-suave)}
+.forca div p{font-size:1.05rem;max-width:56ch}
+.forca div p + p{margin-top:12px;color:var(--tinta-suave)}
 
 /* Venda: faixa escura em duas colunas */
 .escuro{background:var(--tinta);color:#fff;padding:clamp(64px,9vw,120px) 0 48px}
@@ -309,6 +309,42 @@ em{font-style:italic;color:var(--rosa-escuro)}
 
 .revela{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .revela.visto{opacity:1;transform:none}
+
+.links-discretos{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 10px;margin-top:18px;color:rgba(255,255,255,.35)}
+.links-discretos .partilhar{margin-top:0}
+.so-print{display:none}
+
+/* ---------- PDF do resultado (via "Guardar como PDF" do navegador) ----------
+   Versão clara e limpa: só o diagnóstico, sem botões nem bloco de venda. */
+@media print{
+  @page{size:A4;margin:14mm 14mm 16mm}
+  html,body{background:#fff!important}
+  .ecra{display:none!important}
+  #resultado{display:block!important;animation:none!important}
+  .escuro,.rodape,.quiz-topo{display:none!important}
+  .revela{opacity:1!important;transform:none!important}
+  .res-topo{background:#fff!important;color:var(--tinta)!important;padding:0 0 18px!important;border-bottom:1px solid var(--filete)}
+  .res-topo .marca{margin-bottom:28px!important}
+  .res-topo .marca strong,.res-topo .marca{color:var(--tinta)!important}
+  .perfil-titulo,.perfil-titulo .nome-perfil{color:var(--tinta)!important}
+  .perfil-titulo .nome-perfil{font-size:2rem!important}
+  .espelho{color:#333!important;max-width:none!important}
+  .res-grelha{gap:22px!important}
+  .mapa{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid}
+  .mapa h3,.barra-topo{color:#555!important}
+  .barra.dominante .barra-topo{color:var(--tinta)!important}
+  .barra-trilho{background:#eee!important}
+  .barra-trilho i{background:#bbb!important;transition:none!important}
+  .barra.dominante .barra-trilho i,.barra.dominante .barra-topo span{background:var(--rosa)!important}
+  .barra.dominante .barra-topo span{background:none!important;color:var(--rosa-escuro)!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .res-corpo{padding:18px 0 0!important}
+  .linha{break-inside:avoid;padding:16px 0!important}
+  .citacao{font-size:1.35rem!important}
+  .perguntas-ti li{font-size:1.15rem!important}
+  .so-print{display:block!important;margin:22px var(--gutter) 0;padding-top:14px;border-top:1px solid var(--filete);font-size:.82rem;color:var(--tinta-suave);break-inside:avoid}
+  .so-print p + p{margin-top:4px}
+}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -464,7 +500,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
             <p class="preco" id="preco" hidden></p>
             <a class="btn btn-rosa js-checkout" id="btnCheckout" href="#">Quero reforçar a minha confiança <span class="seta" aria-hidden="true">→</span></a>
             <p class="seguro">Pagamento seguro através da Hotmart.</p>
-            <button class="partilhar" id="btnPartilhar" type="button">Partilhar o meu resultado</button>
+            <p class="links-discretos"><button class="partilhar" id="btnPartilhar" type="button">Partilhar o meu resultado</button><span aria-hidden="true">·</span><button class="partilhar" id="btnPdf" type="button">Guardar em PDF</button></p>
             <p class="aviso-copia" id="avisoCopia" aria-live="polite"></p>
           </div>
           <div class="viver revela" id="blocoViver">
@@ -480,6 +516,10 @@ em{font-style:italic;color:var(--rosa-escuro)}
         <p><span class="autor-rotulo">Quem criou esta avaliação</span><strong id="nomeAutor"></strong><span id="bioAutor"></span></p>
       </div>
     </div>
+  </div>
+  <div class="so-print" id="printRodape">
+    <p><strong>Avaliação criada por Mafalda Almeida</strong>, Liderança &amp; Poder Pessoal.</p>
+    <p>Quando sentires que é o momento: desafio <em>Reforça a tua confiança em 21 dias</em>, em <span id="printLink"></span></p>
   </div>
   <footer class="rodape">© <span id="ano"></span> Mafalda Almeida · Design e desenvolvimento: Grupo Cado</footer>
 </section>
@@ -866,6 +906,17 @@ document.querySelectorAll(".js-checkout").forEach(a => a.addEventListener("click
   envia({tipo:"checkout", id:leadId, clicou_checkout:"sim"});
   pixel("InitiateCheckout", {content_name:"Reforça a tua confiança em 21 dias", content_category: resultado ? PERFIS[resultado.dom].nome : ""});
 }));
+
+/* PDF: abre o "Guardar como PDF" do navegador com um nome de ficheiro bonito */
+$("btnPdf").addEventListener("click", () => {
+  const tituloOriginal = document.title;
+  document.title = "Resultado " + (resultado ? resultado.nome + " " + PERFIS[resultado.dom].nome : "") + " | Mafalda Almeida";
+  $("printLink").textContent = LINK_CHECKOUT.replace(/^https?:\/\//, "");
+  document.querySelectorAll("#resultado .barra").forEach(b => b.querySelector("i").style.width = b.dataset.largura);
+  const repoe = () => { document.title = tituloOriginal; removeEventListener("afterprint", repoe); };
+  addEventListener("afterprint", repoe);
+  window.print();
+});
 
 $("btnPartilhar").addEventListener("click", async () => {
   const texto = "Descobri que sou a " + PERFIS[resultado.dom].nome + ". E tu?";
