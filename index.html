@@ -329,7 +329,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
   <div class="miolo captura">
     <p class="eyebrow">Último passo</p>
     <h2>O teu resultado está pronto.</h2>
-    <p class="lead">Diz-me para onde o envio.</p>
+    <p class="lead">Para o veres, deixa aqui os teus contactos.</p>
     <form id="form" novalidate>
       <div class="campo" id="c-nome">
         <label for="nome">Nome</label>
@@ -350,10 +350,11 @@ em{font-style:italic;color:var(--rosa-escuro)}
         <p class="msg-erro">Confirma o teu número de WhatsApp.</p>
       </div>
       <label class="consent" id="c-consent">
-        <input type="checkbox" id="consent" required>
-        <span>Aceito receber o meu resultado e conteúdos sobre confiança. Posso cancelar quando quiser.</span>
+        <input type="checkbox" id="consent">
+        <span>Quero receber novidades, conteúdos e ofertas da Mafalda Almeida por email e WhatsApp. Posso cancelar quando quiser.</span>
       </label>
       <button class="btn" type="submit" id="btnVer">Ver o meu resultado <span class="seta" aria-hidden="true">→</span></button>
+      <p class="privacidade">Os teus dados servem para te mostrar o resultado e só recebes mensagens se marcares a opção acima.</p>
     </form>
   </div>
 </section>
@@ -718,7 +719,7 @@ $("form").addEventListener("submit", e => {
     nome: nome.length >= 2,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email),
     tel: tel.length >= 8 && tel.length <= 15,
-    consent: $("consent").checked
+    consent: true // opcional: não bloqueia o resultado
   };
   $("c-nome").classList.toggle("erro", !ok.nome);
   $("c-email").classList.toggle("erro", !ok.email);
@@ -735,7 +736,7 @@ $("form").addEventListener("submit", e => {
     nome, email, whatsapp: ind + " " + tel,
     perfil_dominante: PERFIS[resultado.dom].nome, perfil_secundario: PERFIS[resultado.sec].nome,
     pontos_P:resultado.pts.P, pontos_A:resultado.pts.A, pontos_I:resultado.pts.I, pontos_C:resultado.pts.C,
-    ...UTM, clicou_checkout:"não"
+    ...UTM, aceita_comunicacoes: $("consent").checked ? "sim" : "não", clicou_checkout:"não"
   });
   pixel("Lead", {content_name:"Quiz sabotadora", content_category:PERFIS[resultado.dom].nome});
   mostra("analise");
