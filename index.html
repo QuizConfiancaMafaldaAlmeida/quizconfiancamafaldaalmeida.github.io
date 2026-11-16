@@ -301,14 +301,20 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .lista{list-style:none;counter-reset:n}
 .lista li{counter-increment:n;display:grid;grid-template-columns:40px 1fr;gap:6px;padding:16px 0;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.86)}
 .lista li::before{content:counter(n,decimal-leading-zero);font-size:.78rem;color:var(--rosa);letter-spacing:.1em;padding-top:3px;font-weight:600}
-.autor{display:grid;grid-template-columns:72px 1fr;gap:18px;align-items:center;margin-top:clamp(56px,7vw,88px);padding-top:32px;border-top:1px solid rgba(255,255,255,.12)}
-.autor img{width:72px;height:90px;object-fit:cover;object-position:50% 20%;border-radius:999px 999px 4px 4px}
-.autor p{font-size:.86rem;color:rgba(255,255,255,.62);line-height:1.55;max-width:70ch}
-.autor strong{display:block;color:#fff;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;margin-bottom:6px}
-.redes{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}
-.redes a{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;padding:6px 0;border-bottom:1px solid rgba(250,54,113,.5);transition:color .25s,border-color .25s}
-.redes a:hover{color:var(--rosa);border-color:var(--rosa)}
-.autor-rotulo{display:block;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rosa);font-weight:600;margin-bottom:6px}
+/* Quem criou: retrato em arco grande + nome em serifa + redes com os ícones oficiais */
+.autor{display:grid;gap:32px;margin-top:clamp(64px,8vw,104px);padding-top:clamp(48px,6vw,72px);border-top:1px solid rgba(255,255,255,.12)}
+.autor img{width:100%;max-width:300px;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:50% 18%;border-radius:999px 999px 6px 6px}
+.autor-rotulo{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rosa);font-weight:600}
+.autor-nome{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin:14px 0 18px;color:#fff;letter-spacing:-.01em}
+.autor-bio{font-size:1.05rem;line-height:1.65;color:rgba(255,255,255,.74);max-width:52ch}
+.autor-segue{margin:32px 0 14px;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600}
+.redes{display:flex;flex-wrap:wrap;gap:12px}
+.redes a{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 20px 10px 16px;border:1px solid rgba(255,255,255,.2);border-radius:999px;color:#fff;text-decoration:none;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:border-color .25s,background .25s,color .25s}
+.redes svg{width:19px;height:19px;color:var(--rosa);flex:none}
+.redes a:hover{border-color:var(--rosa);background:rgba(250,54,113,.08)}
+@media (min-width:900px){
+  .autor{grid-template-columns:300px 1fr;gap:72px;align-items:center}
+}
 
 @media (min-width:900px){
   .res-grelha{grid-template-columns:1.25fr .75fr;gap:72px}
@@ -525,13 +531,16 @@ em{font-style:italic;color:var(--rosa-escuro)}
 
       <div class="autor revela">
         <img id="fotoAutor" src="mafalda.jpg" alt="" loading="lazy">
-        <div>
-          <p><span class="autor-rotulo">Quem criou esta avaliação</span><strong id="nomeAutor"></strong><span id="bioAutor"></span></p>
-          <p class="redes" aria-label="Redes da Mafalda Almeida">
-            <a href="https://www.instagram.com/mafalda.ceo/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.youtube.com/@MafaldaAlmeidaceo" target="_blank" rel="noopener">YouTube</a>
-            <a href="https://www.linkedin.com/in/mafaldaalmeida/" target="_blank" rel="noopener">LinkedIn</a>
-          </p>
+        <div class="autor-texto">
+          <p class="autor-rotulo">Quem criou esta avaliação</p>
+          <h3 class="autor-nome" id="nomeAutor"></h3>
+          <p class="autor-bio" id="bioAutor"></p>
+          <p class="autor-segue">Acompanha o trabalho dela</p>
+          <div class="redes">
+            <a href="https://www.instagram.com/mafalda.ceo/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+            <a href="https://www.youtube.com/@MafaldaAlmeidaceo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg><span>YouTube</span></a>
+            <a href="https://www.linkedin.com/in/mafaldaalmeida/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -552,7 +561,7 @@ const PRECO          = "";                               // vazio = o preço nã
 const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzlu6sH3JHWeolZNuKnUFbVLVlaxUVPlER1bt5vmVoNB-p0Tg-tr4FvEkyG9OJJV1_ttQ/exec";                              // URL do Web App (termina em /exec)
 const NOME_COACH     = "Mafalda Almeida";
 const FOTO_COACH     = "mafalda.jpg";                    // caminho ou URL da foto
-const BIO_COACH      = "Coach executiva, mentora e oradora internacional, com certificação em Liderança pela Universidade de Oxford e autora de \"Veja em Si a Melhor Mulher do Mundo\" e \"Torne-se Insubstituível\".";
+const BIO_COACH      = "Coach executiva, mentora e oradora internacional, com certificação em Liderança pela Universidade de Oxford e autora de “Veja em Si a Melhor Mulher do Mundo” e “Torne-se Insubstituível”.";
 const PIXEL_ID       = "";                               // ID do Meta Pixel (vazio = desligado)
 // Vazio = o bloco "O que vais viver nos 21 dias" fica escondido. Para o mostrar, põe 4 a 5 frases, ex.:
 // const O_QUE_VAIS_VIVER = ["Primeiro ponto.", "Segundo ponto."];
