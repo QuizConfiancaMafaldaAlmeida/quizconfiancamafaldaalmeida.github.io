@@ -676,17 +676,16 @@ const PROFUNDO = {
 };
 
 const PERGUNTAS = [
-  /* Parte 1 · Trabalho e liderança */
   {t:"Tens uma ideia para partilhar numa reunião importante. O que costuma acontecer?", o:{
     P:"Guardo-a até a ter bem fundamentada, e às vezes a reunião acaba antes disso.",
     A:"Primeiro tento perceber para onde vai a opinião do grupo.",
     I:"Partilho-a mais tarde, em privado, com alguém de confiança.",
     C:"Hesito, porque há sempre alguém na sala que parece dominar melhor o tema."}},
   {t:"Fechaste um projeto e correu bem. O que fazes a seguir?", o:{
-    P:"Revejo o que podia ter corrido ainda melhor.",
-    A:"Agradeço à equipa e passo o mérito para quem me ajudou.",
-    I:"Sigo para o próximo sem grande alarde.",
-    C:"Penso no que outras pessoas da minha área já conseguiram no mesmo tempo."}},
+    P:"Faço logo a lista do que podia ter corrido ainda melhor.",
+    A:"Faço questão de dar o mérito a toda a gente, menos a mim.",
+    I:"Passo ao seguinte sem contar a ninguém.",
+    C:"Comparo com o que outras pessoas da minha área já conseguiram."}},
   {t:"Tens de definir o preço de um serviço teu ou pedir um aumento.", o:{
     P:"Só avanço quando sentir que o meu trabalho está mesmo irrepreensível.",
     A:"Fico a pensar se o valor vai pesar à outra pessoa.",
@@ -702,12 +701,11 @@ const PERGUNTAS = [
     A:"Aceito sobretudo para não desiludir quem me convidou.",
     I:"Sugiro outra pessoa que, acho eu, encaixa melhor.",
     C:"Penso logo em quem já lá esteve e se estou ao mesmo nível."}},
-  /* Parte 2 · Relações e imagem */
   {t:"Uma amiga partilha uma grande conquista. O que sentes primeiro?", o:{
-    P:"Fico contente e lembro-me do que eu ainda tenho por terminar.",
-    A:"Celebro com ela e esqueço-me de partilhar as minhas novidades.",
-    I:"Dou-lhe os parabéns em privado, prefiro não comentar em público.",
-    C:"Fico feliz e, ao mesmo tempo, sinto um pequeno aperto."}},
+    P:"Alegria, e logo a seguir a lista do que eu ainda não terminei.",
+    A:"Alegria por ela, e nem me lembro de contar as minhas novidades.",
+    I:"Alegria, mas dou-lhe os parabéns só em privado.",
+    C:"Alegria, misturada com um pequeno aperto."}},
   {t:"Recebes um elogio sincero.", o:{
     P:"Agradeço e penso no detalhe que podia ter ficado melhor.",
     A:"Devolvo o elogio quase de imediato.",
@@ -719,16 +717,15 @@ const PERGUNTAS = [
     I:"Fico mais atrás ou ofereço-me para ser eu a tirar.",
     C:"Quando a vejo, reparo primeiro em como as outras ficaram."}},
   {t:"Alguém faz um comentário que te magoa.", o:{
-    P:"Fico a analisar o que fiz para o provocar.",
+    P:"Fico a rever o que fiz de errado para o provocar.",
     A:"Desvalorizo para não criar mal-estar.",
     I:"Não digo nada e afasto-me um pouco.",
-    C:"Fico a pensar se teria acontecido o mesmo com outra pessoa."}},
-  {t:"Numa conversa com pessoas que acabaste de conhecer, o que costumas fazer?", o:{
-    P:"Escolho bem as palavras para causar boa impressão.",
-    A:"Faço perguntas e deixo os outros brilhar.",
-    I:"Falo pouco de mim e ouço mais do que conto.",
+    C:"Fico a pensar que outra pessoa teria sabido responder melhor."}},
+  {t:"Num evento, estás com pessoas que acabaste de conhecer. O que costumas fazer?", o:{
+    P:"Penso bem em cada frase antes de entrar na conversa.",
+    A:"Concordo com quase tudo, para a conversa correr bem.",
+    I:"Fico a ouvir e espero que alguém venha falar comigo.",
     C:"Dou por mim a medir o percurso de cada um com o meu."}},
-  /* Parte 3 · A tua voz interior */
   {t:"Ao fim do dia, que pensamento te visita mais vezes?", o:{
     P:"“Podia ter feito melhor.”",
     A:"“Hoje cuidei de todos, menos de mim.”",
@@ -740,36 +737,35 @@ const PERGUNTAS = [
     I:"Ter ficado exposta, com toda a gente a olhar.",
     C:"Pensar que outra pessoa não o teria cometido."}},
   {t:"Tens um dia livre, sem compromissos. O que acontece?", o:{
-    P:"Aproveito para pôr em ordem o que ficou pendente.",
+    P:"Acabo por o usar para pôr em ordem o que ficou pendente.",
     A:"Acabo por o dar a quem precisa de mim.",
-    I:"Fico no meu canto, e sabe-me bem não ter de aparecer.",
+    I:"Recuso os convites e fico no meu canto.",
     C:"Passo pelas redes sociais e o dia perde um pouco a cor."}},
   {t:"Qual destas frases já disseste a ti mesma?", o:{
     P:"“Ainda não está bom o suficiente para mostrar.”",
     A:"“Não quero incomodar.”",
     I:"“Não é nada de especial.”",
     C:"“Quem sou eu ao lado dela?”"}},
-  {t:"Quando pensas em descansar a sério, o que sentes?", o:{
-    P:"Que só o mereço depois de terminar tudo.",
-    A:"Culpa, porque há sempre alguém a precisar de mim.",
-    I:"Alívio, sobretudo se ninguém der pela minha falta.",
-    C:"Que fico para trás enquanto os outros avançam."}},
-  /* Parte 4 · Escolhas e futuro */
+  {t:"Precisas de ajuda num projeto importante. O que fazes?", o:{
+    P:"Faço sozinha, porque assim garanto que fica bem feito.",
+    A:"Não peço, para não incomodar ninguém.",
+    I:"Ninguém percebe que preciso, e eu também não digo.",
+    C:"Aguento, porque as outras parecem conseguir sozinhas."}},
   {t:"Tens um sonho ou projeto guardado há algum tempo. Porque ainda não avançou?", o:{
     P:"Ainda não está pronto, preciso de me preparar mais.",
     A:"Há sempre algo ou alguém mais urgente primeiro.",
     I:"Tenho receio do que vão pensar ou dizer.",
     C:"Já há tanta gente a fazer isso, e melhor do que eu."}},
-  {t:"Tens de tomar uma decisão importante. Como costuma ser?", o:{
-    P:"Analiso todos os cenários até ter a certeza, e às vezes demoro demasiado.",
-    A:"Pergunto a várias pessoas e pesa-me muito o que elas acham.",
-    I:"Decido sozinha e em silêncio, e só conto quando já está feito.",
-    C:"Olho para o que outras pessoas na mesma situação escolheram."}},
-  {t:"Quando vês uma mulher que admiras, o que sentes primeiro?", o:{
-    P:"Curiosidade pelo método dela, e alguma pressão para lá chegar.",
-    A:"Vontade de a apoiar e de estar por perto.",
-    I:"Admiração à distância, sem me aproximar.",
-    C:"Inspiração, misturada com a sensação de que eu já devia estar ali."}},
+  {t:"Numa conversa importante, alguém discorda abertamente de ti.", o:{
+    P:"Recuo e só volto ao tema quando tiver um argumento impecável.",
+    A:"Cedo, para não criar tensão.",
+    I:"Calo-me e guardo a minha opinião para mim.",
+    C:"Assumo que a outra pessoa sabe mais do que eu."}},
+  {t:"Pensas em publicar algo sobre o teu trabalho nas redes sociais. O que acontece?", o:{
+    P:"Revejo tantas vezes que acabo por adiar.",
+    A:"Fico a pensar no que as pessoas vão achar.",
+    I:"Acabo por não publicar, prefiro não me expor.",
+    C:"Vejo o que as outras já publicaram e desisto."}},
   {t:"Imagina que daqui a um ano a tua vida está igual. O que te pesaria mais?", o:{
     P:"Ter continuado à espera do momento perfeito.",
     A:"Ter passado mais um ano a viver para os outros.",
