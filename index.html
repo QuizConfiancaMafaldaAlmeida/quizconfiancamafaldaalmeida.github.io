@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Segurança: só carrega recursos do próprio site, do Meta Pixel e do Apps Script dos leads -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.facebook.com; font-src 'self'; connect-src https://script.google.com https://script.googleusercontent.com https://www.facebook.com https://connect.facebook.net; frame-src https://www.facebook.com; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Descobre o que te está a sabotar | Mafalda Almeida</title>
 <meta name="description" content="Há 4 padrões que fazem mulheres incríveis duvidarem de si. Em 3 minutos ficas a conhecer o teu.">
 <meta property="og:title" content="Descobre o que te está a sabotar">
@@ -223,6 +226,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .msg-erro{display:none;font-size:.8rem;color:var(--rosa-escuro);margin-top:6px}
 .campo.erro .msg-erro{display:block}
 .tel{display:grid;grid-template-columns:84px 1fr;gap:14px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .consent{display:flex;gap:14px;align-items:flex-start;margin:30px 0 30px;font-size:.88rem;line-height:1.55;color:var(--tinta-suave);cursor:pointer}
 .consent input{appearance:none;-webkit-appearance:none;flex:0 0 22px;width:22px;height:22px;border:1px solid rgba(23,23,23,.4);border-radius:4px;margin-top:1px;display:grid;place-items:center;cursor:pointer;background:#fff}
 .consent input:checked{background:var(--tinta);border-color:var(--tinta)}
@@ -455,21 +459,22 @@ em{font-style:italic;color:var(--rosa-escuro)}
     <h2>Estás a um passo do teu <em>resultado.</em></h2>
     <p class="lead">Só preciso de saber quem és, para o preparar à tua medida.</p>
     <form id="form" novalidate>
+      <div class="hp" aria-hidden="true"><label>Empresa <input id="empresa" name="empresa" type="text" tabindex="-1" autocomplete="off"></label></div>
       <div class="campo" id="c-nome">
         <label for="nome">Nome</label>
-        <input id="nome" name="nome" type="text" autocomplete="given-name" required>
+        <input id="nome" name="nome" type="text" autocomplete="given-name" maxlength="80" required>
         <p class="msg-erro">Escreve o teu nome, por favor.</p>
       </div>
       <div class="campo" id="c-email">
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" required>
         <p class="msg-erro">Confirma o teu email, parece faltar algo.</p>
       </div>
       <div class="campo" id="c-tel">
         <label for="tel">WhatsApp</label>
         <div class="tel">
-          <input id="indicativo" aria-label="Indicativo" value="+351" inputmode="tel" autocomplete="tel-country-code">
-          <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="912 345 678" required>
+          <input id="indicativo" aria-label="Indicativo" value="+351" inputmode="tel" autocomplete="tel-country-code" maxlength="5">
+          <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="912 345 678" maxlength="20" required>
         </div>
         <p class="msg-erro">Confirma o teu número de WhatsApp.</p>
       </div>
@@ -897,6 +902,7 @@ $("form").addEventListener("submit", e => {
   resultado.nome = primeiro.charAt(0).toLocaleUpperCase("pt-PT") + primeiro.slice(1).toLocaleLowerCase("pt-PT");
   envia({
     tipo:"lead", id:leadId, data:new Date().toLocaleString("pt-PT"),
+    hp: $("empresa").value, tempo: Math.round((Date.now() - inicioQuiz) / 1000),
     nome, email, whatsapp: ind + " " + tel,
     perfil_dominante: PERFIS[resultado.dom].nome, perfil_secundario: PERFIS[resultado.sec].nome,
     pontos_P:resultado.pts.P, pontos_A:resultado.pts.A, pontos_I:resultado.pts.I, pontos_C:resultado.pts.C,
@@ -1021,7 +1027,8 @@ $("listaViver").innerHTML = "";
 if (!O_QUE_VAIS_VIVER.length) $("blocoViver").remove();
 O_QUE_VAIS_VIVER.forEach(txt => { const li = document.createElement("li"); li.textContent = txt; $("listaViver").appendChild(li); });
 
-$("btnComecar").addEventListener("click", () => { mostra("quiz"); desenhaPergunta(); });
+let inicioQuiz = 0;
+$("btnComecar").addEventListener("click", () => { inicioQuiz = Date.now(); mostra("quiz"); desenhaPergunta(); });
 $("btnVoltar").addEventListener("click", () => { if (atual > 0){ atual--; desenhaPergunta(); } });
 ["nome","email","tel"].forEach(id => $(id).addEventListener("input", () => $("c-"+id).classList.remove("erro")));
 $("consent").addEventListener("change", () => $("c-consent").classList.remove("erro"));
