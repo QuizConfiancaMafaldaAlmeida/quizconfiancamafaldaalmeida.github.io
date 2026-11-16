@@ -225,9 +225,9 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .ecos-intro{font-size:.92rem;color:var(--tinta-suave);margin-bottom:12px}
 .ecos{list-style:none;display:grid;gap:10px}
 .ecos li{font-family:var(--serif);font-style:italic;font-size:1.08rem;line-height:1.45;padding-left:16px;border-left:1px solid var(--rosa)}
-.custos{display:grid;gap:2px}
-.custos dt{font-weight:600;font-size:.92rem;margin-bottom:2px}
-.custos dd{color:var(--tinta-suave);max-width:60ch;margin-bottom:14px}
+.custos{display:grid;grid-template-columns:96px 1fr;gap:10px 14px}
+.custos dt{font-weight:600;font-size:.85rem;padding-top:2px}
+.custos dd{color:var(--tinta-suave)}
 .perguntas-ti{margin:12px 0 24px;padding:30px 24px 26px;background:var(--papel-2);border-radius:6px}
 .perguntas-ti h3{font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--rosa-escuro);margin-bottom:18px}
 .perguntas-ti ol{list-style:none;counter-reset:q;display:grid;gap:18px}
@@ -241,6 +241,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .escuro{background:var(--tinta);color:#fff;margin-top:56px;padding:64px 0 56px}
 /* Bloco de venda: usa as palavras dela (perguntas 19 e 20) em vez de promessas inventadas */
 .venda h2{margin:16px 0 28px}
+.eco-medo{font-family:var(--serif);font-style:italic;font-size:1.25rem;line-height:1.35;color:rgba(255,255,255,.72);margin:6px 0 22px}
 .v-intro{color:rgba(255,255,255,.66);font-size:.95rem}
 .desejo{font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,6.6vw,2.25rem);line-height:1.2;margin:10px 0 28px;text-wrap:balance}
 .desejo::before{content:"\201C";color:var(--rosa)}
@@ -271,15 +272,10 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .oferta .preco-rotulo{margin-bottom:22px}
 .oferta .preco-rotulo:has(+ .preco:not([hidden])){margin-bottom:0}
 .oferta .preco{font-family:var(--serif);font-size:3rem;line-height:1.1;margin:6px 0 24px}
-.oferta .btn{min-height:64px;font-size:.8rem;letter-spacing:.08em;padding:16px 22px}
+.oferta .btn{min-height:64px;font-size:1rem;letter-spacing:.01em;text-transform:none;padding:16px 22px}
 .partilhar{display:inline-block;margin-top:22px;background:none;border:0;color:rgba(255,255,255,.62);font-size:.85rem;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;cursor:pointer;padding:8px}
 .partilhar:hover{color:#fff}
 .aviso-copia{font-size:.8rem;color:var(--rosa);min-height:1.2em;margin-top:4px}
-/* CTA fixo só no telemóvel: aparece depois do mapa e esconde-se ao chegar à oferta */
-.cta-fixo{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));background:rgba(23,23,23,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);transform:translateY(110%);transition:transform .45s var(--ease);visibility:hidden}
-.cta-fixo.visivel{transform:none;visibility:visible}
-.cta-fixo .btn{display:flex;max-width:560px;margin:0 auto;min-height:54px;font-size:.78rem}
-@media (min-width:861px){.cta-fixo{display:none}}
 .rodape{padding:28px 0 calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.06em;background:var(--tinta)}
 
 .revela{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -386,15 +382,13 @@ em{font-style:italic;color:var(--rosa-escuro)}
       <p class="eyebrow revela">O teu padrão</p>
       <h2 class="perfil-titulo revela" id="r-titulo"></h2>
       <p class="espelho revela" id="r-espelho"></p>
-      <p class="espelho2 revela" id="r-espelho2"></p>
       <p class="citacao revela">Isto não é quem tu és. É um padrão que aprendeste para te protegeres. E os padrões mudam-se.</p>
-      <div class="bloco revela" id="b-respostas"><h3>O que as tuas respostas mostram</h3><p class="ecos-intro">Ao longo da avaliação, escolheste frases como estas:</p><ul class="ecos" id="r-respostas"></ul></div>
-      <div class="bloco revela"><h3>De onde vem este padrão</h3><p id="r-origem"></p></div>
-      <div class="bloco revela"><h3>O que isto te tem custado</h3><dl class="custos" id="r-custos"></dl></div>
+      <div class="bloco revela" id="b-respostas"><h3>O que as tuas respostas mostram</h3><p class="ecos-intro">Escolheste frases como estas:</p><ul class="ecos" id="r-respostas"></ul></div>
+      <div class="bloco revela"><h3>O que isto te pode estar a custar</h3><dl class="custos" id="r-custos"></dl></div>
       <div class="perguntas-ti revela">
         <h3>Três perguntas para ti</h3>
         <ol id="r-perguntas"></ol>
-        <p class="nota-ti">Não precisas de responder agora. Repara só no que sentiste ao lê-las.</p>
+        <p class="nota-ti">Não precisas de responder. Repara só no que sentiste.</p>
       </div>
       <div class="bloco revela"><h3>A tua força escondida</h3><p id="r-forca"></p></div>
       <div class="bloco revela"><h3>O teu segundo padrão</h3><p id="r-secundario"></p></div>
@@ -406,21 +400,13 @@ em{font-style:italic;color:var(--rosa-escuro)}
       <div class="venda revela">
         <p class="eyebrow">O teu próximo passo</p>
         <h2 id="v-titulo"></h2>
-        <p class="v-intro">Na última pergunta disseste que, daqui a 21 dias, gostavas de sentir</p>
+        <p class="v-intro">Disseste que, daqui a um ano, o que mais te pesaria era</p>
+        <p class="eco-medo" id="v-medo"></p>
+        <p class="v-intro">E que, daqui a 21 dias, gostavas de sentir</p>
         <p class="desejo" id="v-desejo"></p>
         <p class="v-ponte" id="r-ponte"></p>
       </div>
 
-      <div class="caminhos revela">
-        <div class="caminho">
-          <h3>Se nada mudar</h3>
-          <p>Disseste que, daqui a um ano, o que mais te pesaria era <span class="eco" id="v-medo"></span></p>
-        </div>
-        <div class="caminho escolhido">
-          <h3>Se começares hoje</h3>
-          <p id="v-ganho"></p>
-        </div>
-      </div>
 
       <div class="viver revela" id="blocoViver">
         <p class="eyebrow">Desafio de 21 dias</p>
@@ -442,9 +428,6 @@ em{font-style:italic;color:var(--rosa-escuro)}
         <p><span class="autor-rotulo">Quem criou esta avaliação</span><strong id="nomeAutor"></strong><span id="bioAutor"></span></p>
       </div>
     </div>
-  </div>
-  <div class="cta-fixo" id="ctaFixo">
-    <a class="btn btn-rosa js-checkout" href="#" tabindex="-1">Quero reforçar a minha confiança <span class="seta" aria-hidden="true">→</span></a>
   </div>
   <footer class="rodape">© <span id="ano"></span> Mafalda Almeida · Design e desenvolvimento: Grupo Cado</footer>
 </section>
@@ -499,30 +482,30 @@ const PARTES = ["Trabalho e liderança", "Relações e imagem", "A tua voz inter
 const PROFUNDO = {
   P:{espelho2:"Por fora, pareces alguém que tem tudo sob controlo. Por dentro, há uma voz que revê cada detalhe, que adia o envio e que encontra sempre mais uma coisa a melhorar antes de te deixar mostrar o que fizeste.",
      origem:"Muitas vezes este padrão nasce cedo, quando aprendeste que o teu valor estava naquilo que fazias bem. Fazer tudo sem falhas tornou-se uma forma de garantir aprovação e de evitar a crítica, e durante muito tempo resultou. Hoje, o que te protegeu é o que te prende.",
-     custos:[["No trabalho","Projetos que ficam meses na gaveta à espera do momento certo, enquanto outras pessoas, menos preparadas do que tu, avançam com versões imperfeitas e ocupam o espaço que podia ser teu."],
-             ["Nas relações","Dificuldade em delegar e em confiar no trabalho dos outros, o que te deixa sobrecarregada e, muitas vezes, sozinha com tudo."],
-             ["Contigo","Um cansaço que não passa com descanso, porque a cabeça nunca desliga, e conquistas que celebras durante cinco minutos antes de passares ao objetivo seguinte."]],
+     custos:[["No trabalho","Projetos parados à espera do momento perfeito, enquanto outras avançam."],
+             ["Nas relações","Dificuldade em delegar, e tudo acaba nas tuas mãos."],
+             ["Contigo","Um cansaço que não passa, porque a cabeça nunca desliga."]],
      perguntas:["Quantas ideias tuas ainda estão à espera de estar perfeitas?","Quando foi a última vez que terminaste algo e sentiste que era suficiente?","Se ninguém fosse avaliar o resultado, o que já terias começado?"],
      forca2:"A tua exigência é um recurso valioso, só precisa de deixar de estar virada contra ti."},
   A:{espelho2:"Sabes ler o que os outros precisam antes de eles o dizerem, e muitas vezes dás antes de te pedirem. O problema é que, à força de estares atenta a todos, deixaste de ouvir aquilo de que tu própria precisas.",
      origem:"Este padrão costuma nascer quando aprendeste que ser amada dependia de ser útil, simpática e fácil. Dizer sim tornou-se a forma mais segura de manter as pessoas por perto e de evitar o conflito, mesmo quando isso te custava.",
-     custos:[["No trabalho","Cobras menos do que vales, aceitas tarefas que não são tuas e ficas com o que ninguém quer fazer, enquanto a tua energia se gasta nas prioridades dos outros."],
-             ["Nas relações","Relações desequilibradas, em que dás muito mais do que recebes, e uma mágoa silenciosa quando ninguém repara em tudo o que fazes."],
-             ["Contigo","Culpa sempre que escolhes por ti, um cansaço emocional difícil de explicar e a sensação de que a tua vida está sempre em segundo plano."]],
+     custos:[["No trabalho","Cobras menos do que vales e ficas com o que ninguém quer fazer."],
+             ["Nas relações","Dás muito mais do que recebes, e quase ninguém repara."],
+             ["Contigo","Culpa sempre que escolhes por ti."]],
      perguntas:["Quantas vezes disseste sim esta semana quando querias dizer não?","Se deixasses de agradar a todos, quem ficaria ao teu lado?","O que farias com o tempo e a energia que hoje dás aos outros?"],
      forca2:"Quando aprenderes a incluir-te na tua própria lista, essa sensibilidade passa a ser uma força de liderança."},
   I:{espelho2:"Observas tudo, percebes o que muitos não veem e tens opiniões bem pensadas, mas guardas a maioria delas. Preferes que o teu trabalho fale por ti, mesmo sabendo que, sem a tua voz, ele passa muitas vezes despercebido.",
      origem:"Este padrão costuma nascer em momentos em que mostrar-te trouxe crítica, comparação ou rejeição. Ficar na sombra tornou-se uma forma de te protegeres, e foi útil durante algum tempo, mas hoje está a esconder exatamente aquilo que tens de melhor.",
-     custos:[["No trabalho","Promoções, clientes e convites que vão para quem se faz ouvir, mesmo quando tu sabes mais, e ideias tuas que acabam apresentadas por outra pessoa."],
-             ["Nas relações","Pessoas que gostam de ti sem te conhecerem verdadeiramente, porque raramente mostras o que pensas e o que sentes."],
-             ["Contigo","A frustração de saberes do que és capaz e de veres que o mundo à tua volta ainda não sabe."]],
+     custos:[["No trabalho","Oportunidades que vão para quem se faz ouvir, mesmo quando tu sabes mais."],
+             ["Nas relações","Pessoas que gostam de ti sem te conhecerem de verdade."],
+             ["Contigo","Saberes do que és capaz e mais ninguém saber."]],
      perguntas:["Quantas vezes, este mês, pensaste algo importante e não o disseste?","Que oportunidade deixaste passar por receio de ser vista?","Quem estaria a beneficiar das tuas ideias se as partilhasses?"],
      forca2:"Não precisas de mudar a tua natureza para seres vista, só de deixar de te esconder."},
   C:{espelho2:"As redes sociais, as colegas e as amigas servem todas de régua. E, por mais que avances, a tua medida nunca é o teu próprio progresso, é sempre a distância que te falta para chegar onde outra pessoa já está.",
      origem:"Este padrão costuma nascer quando, desde cedo, foste medida em relação aos outros, nas notas, na aparência ou nas conquistas. Comparar-te tornou-se a forma de saber se estavas bem, e ainda hoje procuras essa resposta fora de ti.",
-     custos:[["No trabalho","Decisões tomadas para acompanhar os outros e não para seguir a tua visão, preços abaixo do teu valor e projetos que abandonas porque alguém já os faz."],
-             ["Nas relações","Uma tensão silenciosa com pessoas de quem gostas, porque o sucesso delas, sem quereres, lembra-te daquilo que achas que te falta."],
-             ["Contigo","Conquistas que perdem o brilho poucos minutos depois e a sensação constante de estares atrasada numa corrida que nunca escolheste."]],
+     custos:[["No trabalho","Decisões tomadas para acompanhar os outros, e não para seguir a tua visão."],
+             ["Nas relações","Um aperto silencioso quando alguém de quem gostas conquista algo."],
+             ["Contigo","Conquistas que perdem o brilho poucos minutos depois."]],
      perguntas:["Quanto do que desejas é teu, e quanto é reflexo do que vês nos outros?","Que conquista tua desvalorizaste este ano porque alguém tinha feito mais?","Como seria o teu caminho se ninguém estivesse a ver?"],
      forca2:"Quando a régua passar a ser o teu próprio caminho, essa ambição transforma-se em direção."}
 };
@@ -787,8 +770,6 @@ function desenhaResultado(){
   const s = document.createElement("span"); s.className = "nome-perfil"; s.textContent = P.artigo; t.appendChild(s);
   $("r-espelho").textContent = P.espelho;
   const X = PROFUNDO[dom];
-  $("r-espelho2").textContent = X.espelho2;
-  $("r-origem").textContent = X.origem;
   const dl = $("r-custos"); dl.innerHTML = "";
   X.custos.forEach(([area, txt]) => {
     const dt = document.createElement("dt"); dt.textContent = area;
@@ -800,11 +781,11 @@ function desenhaResultado(){
   // Até 3 respostas dela que apontaram para o padrão dominante (sem a pergunta final, usada no bloco de venda)
   const ecos = respostas.slice(0, -1).map((c, i) => c === dom ? PERGUNTAS[i].o[c] : null).filter(Boolean);
   const ul = $("r-respostas"); ul.innerHTML = "";
-  [ecos[0], ecos[Math.floor(ecos.length / 2)], ecos[ecos.length - 1]]
+  [ecos[0], ecos[ecos.length - 1]]
     .filter((v, i, arr) => v && arr.indexOf(v) === i)
     .forEach(t => { const li = document.createElement("li"); li.textContent = t.replace(/^\u201C|\u201D$/g, ""); ul.appendChild(li); });
   $("b-respostas").hidden = !ul.children.length;
-  $("r-forca").textContent = P.forca + " " + X.forca2;
+  $("r-forca").textContent = P.forca;
   $("r-secundario").textContent = "Também tens traços de " + S.nome + ", " + S.sec;
   $("r-ponte").textContent = P.ponte;
 
@@ -814,8 +795,7 @@ function desenhaResultado(){
   const medo = PERGUNTAS[n-2].o[respostas[n-2]] || "";
   $("v-titulo").textContent = resultado.nome + ", este padrão não tem de te acompanhar para sempre.";
   $("v-desejo").textContent = desejo.replace(/\.$/, "");
-  $("v-medo").textContent = "\u201C" + medo.replace(/\.$/, "") + "\u201D.";
-  $("v-ganho").textContent = "Começas hoje a construir " + desejo.charAt(0).toLowerCase() + desejo.slice(1).replace(/\.$/, "").replace(/\bmeu\b/g, "teu").replace(/\bme\b/g, "te") + ", com 21 dias para a tornar parte de ti.";
+  $("v-medo").textContent = "\u201C" + medo.replace(/\.$/, "") + "\u201D";
 
   const url = new URL(LINK_CHECKOUT, location.href);
   url.searchParams.set("perfil", P.nome.toLowerCase());
@@ -840,15 +820,6 @@ $("btnPartilhar").addEventListener("click", async () => {
   }
 });
 
-function atualizaCtaFixo(){
-  const cta = $("ctaFixo");
-  if (!$("resultado").classList.contains("ativo")) { cta.classList.remove("visivel"); return; }
-  const passouMapa = document.querySelector(".mapa").getBoundingClientRect().bottom < 0;
-  const antesDaOferta = $("oferta").getBoundingClientRect().top > innerHeight - 40;
-  cta.classList.toggle("visivel", passouMapa && antesDaOferta);
-}
-addEventListener("scroll", atualizaCtaFixo, {passive:true});
-addEventListener("resize", atualizaCtaFixo);
 
 function observaReveal(){
   const els = document.querySelectorAll("#resultado .revela:not(.visto)");
