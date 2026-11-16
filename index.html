@@ -152,29 +152,40 @@ em{font-style:italic;color:var(--rosa-escuro)}
   .capa-foto::after{background:linear-gradient(90deg,var(--tinta) 0%,rgba(23,23,23,0) 30%),linear-gradient(0deg,rgba(23,23,23,.5) 0%,rgba(23,23,23,0) 30%)}
 }
 
-/* ---------- 2. Perguntas ---------- */
-.quiz-topo{position:sticky;top:0;z-index:5;background:rgba(250,247,246,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.quiz-topo .miolo{display:flex;align-items:center;justify-content:space-between;height:60px}
-.voltar{background:none;border:0;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--tinta-suave);cursor:pointer;padding:10px 0;min-width:70px;text-align:left}
-.voltar[hidden]{visibility:hidden;display:block}
-.contador{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tinta-suave);font-weight:500;font-variant-numeric:tabular-nums}
-.progresso{height:2px;background:var(--filete)}
+/* ---------- 2. Perguntas ----------
+   Detalhes a rosa só na tipografia: número da pergunta, letras das opções, barra de progresso. */
+.quiz-topo{position:sticky;top:0;z-index:5;background:rgba(250,247,246,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.quiz-topo .res-largo{display:flex;align-items:center;justify-content:space-between;height:68px}
+.quiz-topo .marca{font-size:.7rem;color:var(--tinta)}
+.topo-dir{display:flex;align-items:center;gap:22px}
+.voltar{background:none;border:0;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--tinta-suave);cursor:pointer;padding:10px 0}
+.voltar:hover{color:var(--rosa-escuro)}
+.voltar[hidden]{display:none}
+.contador{font-size:.78rem;letter-spacing:.14em;color:var(--tinta-suave);font-weight:500;font-variant-numeric:tabular-nums}
+.contador b{color:var(--rosa-escuro);font-weight:600}
+.progresso{height:3px;background:var(--papel-2)}
 .progresso span{display:block;height:100%;width:100%;background:var(--rosa);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
-.pergunta{padding:clamp(36px,8vh,64px) 0 48px}
-.incentivo{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--rosa-escuro);margin-bottom:22px;min-height:0}
-.pergunta h2{margin-bottom:10px}
-.parte{margin-bottom:16px}
-.nota{font-size:.82rem;color:var(--tinta-suave);margin-bottom:6px}
-.opcoes{list-style:none;margin-top:28px;border-top:1px solid var(--filete)}
-.opcao{position:relative;display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--filete);padding:20px 8px 20px 26px;font-size:1rem;line-height:1.5;cursor:pointer;transition:background .25s,color .25s;-webkit-tap-highlight-color:transparent}
-.opcao::before{content:"";position:absolute;left:4px;top:50%;width:10px;height:10px;margin-top:-5px;border:1px solid rgba(23,23,23,.35);border-radius:50%;transition:all .3s var(--ease)}
-@media (hover:hover){.opcao:hover{background:var(--papel-2)}}
-.opcao.escolhida{background:var(--papel-2)}
-.opcao.escolhida::before{background:var(--rosa);border-color:var(--rosa);transform:scale(1.2)}
-.opcao.escolhida::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--rosa)}
+.pergunta{display:grid;gap:28px;padding:clamp(36px,7vh,88px) 0 64px}
+.num-pergunta{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(3rem,9vw,6.5rem);line-height:.9;color:var(--rosa);letter-spacing:-.03em;margin:30px 0 22px}
+.pergunta h2{font-size:clamp(1.75rem,3.4vw,2.7rem);line-height:1.15;max-width:20ch}
+.incentivo{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--rosa-escuro);margin-top:22px}
+.nota{font-size:.9rem;color:var(--tinta-suave);margin-top:16px}
+.opcoes{list-style:none;border-top:1px solid var(--filete);align-self:start}
+.opcao{position:relative;display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--filete);padding:22px 14px 22px 10px;font-size:1.08rem;line-height:1.5;cursor:pointer;transition:background .25s,color .25s;-webkit-tap-highlight-color:transparent}
+.letra{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(194,24,91,.35);border-radius:50%;font-size:.72rem;font-weight:600;letter-spacing:0;color:var(--rosa-escuro);transition:background .25s,color .25s,border-color .25s}
+@media (hover:hover){
+  .opcao:hover{background:rgba(250,54,113,.045)}
+  .opcao:hover .letra{border-color:var(--rosa-escuro)}
+}
+.opcao.escolhida{background:rgba(250,54,113,.08)}
+.opcao.escolhida .letra{background:var(--rosa-escuro);border-color:var(--rosa-escuro);color:#fff}   /* 5.9:1 */
+.opcao.escolhida::after{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:2px;background:var(--rosa)}
 .opcoes.bloqueada .opcao{pointer-events:none}
 .troca{animation:troca .55s var(--ease) both}
 @keyframes troca{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+@media (min-width:900px){
+  .pergunta{grid-template-columns:.95fr 1.05fr;gap:80px;align-items:start;padding-top:clamp(56px,10vh,110px)}
+}
 
 /* ---------- 3. Captura ---------- */
 .captura{padding:clamp(48px,10vh,88px) 0 56px}
@@ -323,18 +334,24 @@ em{font-style:italic;color:var(--rosa-escuro)}
 <!-- ============ 2. PERGUNTAS ============ -->
 <section id="quiz" class="ecra" aria-live="polite">
   <div class="quiz-topo">
-    <div class="miolo">
-      <button class="voltar" id="btnVoltar" hidden>← Voltar</button>
-      <span class="contador" id="contador">1 / 20</span>
+    <div class="res-largo">
+      <span class="marca" aria-label="Mafalda Almeida">MAF<b>A</b>LDA<br><strong>ALMEIDA</strong></span>
+      <div class="topo-dir">
+        <button class="voltar" id="btnVoltar" hidden>← Voltar</button>
+        <span class="contador" id="contador"><b>01</b> / 20</span>
+      </div>
     </div>
     <div class="progresso" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="barraProg"><span></span></div>
   </div>
-  <div class="miolo">
+  <div class="res-largo">
     <div class="pergunta" id="pergunta">
-      <p class="incentivo" id="incentivo" hidden></p>
-      <p class="eyebrow parte" id="parte"></p>
-      <h2 id="textoPergunta"></h2>
-      <p class="nota" id="notaPergunta" hidden></p>
+      <div>
+        <p class="eyebrow parte" id="parte"></p>
+        <span class="num-pergunta" id="numPergunta" aria-hidden="true">01</span>
+        <h2 id="textoPergunta"></h2>
+        <p class="nota" id="notaPergunta" hidden></p>
+        <p class="incentivo" id="incentivo" hidden></p>
+      </div>
       <ul class="opcoes" id="opcoes"></ul>
     </div>
   </div>
@@ -681,7 +698,9 @@ const pixel = (ev, data) => { if (window.fbq) fbq('track', ev, data || {}); };
 /* ---------- Perguntas ---------- */
 function desenhaPergunta(){
   const p = PERGUNTAS[atual];
-  $("contador").textContent = (atual+1) + " / " + PERGUNTAS.length;
+  const dois = n => String(n).padStart(2, "0");
+  $("contador").innerHTML = "<b>" + dois(atual+1) + "</b> / " + PERGUNTAS.length;
+  $("numPergunta").textContent = dois(atual+1);
   $("barraProg").querySelector("span").style.transform = "scaleX(" + (atual / PERGUNTAS.length) + ")";
   $("barraProg").setAttribute("aria-valuenow", atual);
   $("btnVoltar").hidden = atual === 0;
@@ -694,10 +713,13 @@ function desenhaPergunta(){
   $("notaPergunta").hidden = !p.peso;
   $("notaPergunta").textContent = "Escolhe a que mais te diz neste momento.";
   const ul = $("opcoes"); ul.innerHTML = ""; ul.classList.remove("bloqueada");
-  ordemOpcoes[atual].forEach(cod => {
+  ordemOpcoes[atual].forEach((cod, idx) => {
     const li = document.createElement("li");
     const b = document.createElement("button");
-    b.type = "button"; b.className = "opcao"; b.textContent = p.o[cod];
+    b.type = "button"; b.className = "opcao";
+    const l = document.createElement("span"); l.className = "letra"; l.setAttribute("aria-hidden", "true"); l.textContent = "ABCD"[idx];
+    const tx = document.createElement("span"); tx.textContent = p.o[cod];
+    b.append(l, tx);
     if (respostas[atual] === cod) b.classList.add("escolhida");
     b.addEventListener("click", () => escolhe(cod, b));
     li.appendChild(b); ul.appendChild(li);
