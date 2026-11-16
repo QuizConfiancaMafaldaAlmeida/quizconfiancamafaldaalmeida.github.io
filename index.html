@@ -305,6 +305,8 @@ em{font-style:italic;color:var(--rosa-escuro)}
   .linha{grid-template-columns:260px 1fr;gap:40px}
   .venda-grelha{grid-template-columns:1.1fr .9fr;gap:80px}
 }
+.assinatura{font-family:var(--serif);font-style:italic;font-size:1.05rem;letter-spacing:0;color:rgba(255,255,255,.85);text-decoration:none;border-bottom:1px solid rgba(250,54,113,.5);padding-bottom:1px;transition:color .25s,border-color .25s}
+.assinatura:hover{color:var(--rosa);border-color:var(--rosa)}
 .rodape{padding:28px 0 calc(28px + env(safe-area-inset-bottom));text-align:center;font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.06em;background:var(--tinta)}
 
 .revela{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -521,7 +523,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
     <p><strong>Avaliação criada por Mafalda Almeida</strong>, Liderança &amp; Poder Pessoal.</p>
     <p>Quando sentires que é o momento: desafio <em>Reforça a tua confiança em 21 dias</em>, em <span id="printLink"></span></p>
   </div>
-  <footer class="rodape">© <span id="ano"></span> Mafalda Almeida · Design e desenvolvimento: Grupo Cado</footer>
+  <footer class="rodape">© <span id="ano"></span> Mafalda Almeida · Design e desenvolvimento: <a class="assinatura" href="https://www.instagram.com/ogrupocado/" target="_blank" rel="noopener">Grupo Cado</a></footer>
 </section>
 
 <script>
