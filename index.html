@@ -606,25 +606,25 @@ const O_QUE_VAIS_VIVER = [];
    DADOS DO QUIZ
    ===================================================================== */
 const PERFIS = {
-  P:{nome:"Perfeccionista", artigo:"A PERFECCIONISTA",
+  P:{nome:"Exigência", artigo:"A EXIGÊNCIA", de:"da Exigência", art:"a Exigência",
      espelho:"Tens padrões altos e uma enorme vontade de fazer bem. Mas, algures pelo caminho, \"bem\" passou a significar \"perfeito\", e perfeito nunca chega.",
      custo:"Projetos adiados, um cansaço constante e a sensação de nunca ser suficiente, mesmo quando os outros te admiram.",
      forca:"És dedicada, cuidadosa e consistente. Quando aprenderes a avançar com o \"bom o suficiente\", ninguém te para.",
      ponte:"No desafio de 21 dias vais treinar a confiança de agir antes de te sentires pronta, um passo pequeno por dia.",
      sec:"por isso há momentos em que a exigência contigo própria pesa mais do que devia."},
-  A:{nome:"Agradadora", artigo:"A AGRADADORA",
+  A:{nome:"Aprovação", artigo:"A APROVAÇÃO", de:"da Aprovação", art:"a Aprovação",
      espelho:"És a pessoa com quem todos contam. Ouves, ajudas, resolves. Mas, quando chega a tua vez, ficas sempre para depois.",
      custo:"Cansaço emocional, culpa sempre que pensas em ti e a sensação de que a tua vida é dos outros.",
      forca:"Tens uma empatia rara. Quando a usares também contigo, vais ter relações mais leves e mais verdadeiras.",
      ponte:"No desafio de 21 dias vais aprender a pôr limites com carinho e a escolher-te sem culpa.",
      sec:"por isso também te custa dizer não e acabas, às vezes, por te pôr em último lugar."},
-  I:{nome:"Invisível", artigo:"A INVISÍVEL",
+  I:{nome:"Silêncio", artigo:"O SILÊNCIO", de:"do Silêncio", art:"o Silêncio",
      espelho:"Tens muito para dizer e muito valor para mostrar, mas aprendeste que é mais seguro não dar nas vistas.",
      custo:"Oportunidades que passam, ideias que ficam por dizer e a sensação de que ninguém te conhece realmente.",
      forca:"És observadora e profunda. Quando a tua voz sair, vai ter peso.",
      ponte:"No desafio de 21 dias vais ganhar coragem para ocupar o teu espaço, de forma gradual e segura.",
      sec:"por isso há alturas em que guardas para ti o que merecia ser dito em voz alta."},
-  C:{nome:"Comparadora", artigo:"A COMPARADORA",
+  C:{nome:"Comparação", artigo:"A COMPARAÇÃO", de:"da Comparação", art:"a Comparação",
      espelho:"Olhas à tua volta e vês sempre alguém mais à frente, mais bonita, mais bem-sucedida. E o teu próprio caminho parece sempre pequeno.",
      custo:"Desvalorizas as tuas conquistas, ficas paralisada e perdes a alegria daquilo que já és.",
      forca:"Tens ambição e sabes reconhecer o que é bom. Falta virares esse olhar para ti.",
@@ -925,7 +925,7 @@ function desenhaResultado(){
   setTimeout(() => barras.querySelectorAll(".barra").forEach(b => b.querySelector("i").style.width = b.dataset.largura), 350);
 
   const t = $("r-titulo"); t.textContent = "";
-  t.append(resultado.nome + ", tu és");
+  t.append(resultado.nome + ", o padrão que mais te sabota é");
   const s = document.createElement("span"); s.className = "nome-perfil";
   const b = document.createElement("b"); b.textContent = P.artigo.charAt(0);
   s.append(b, P.artigo.slice(1)); t.appendChild(s);
@@ -948,7 +948,7 @@ function desenhaResultado(){
     .forEach(t => { const li = document.createElement("li"); li.textContent = t.replace(/^\u201C|\u201D$/g, ""); ul.appendChild(li); });
   $("b-respostas").hidden = !ul.children.length;
   $("r-forca").textContent = P.forca;
-  $("r-secundario").textContent = "Também tens traços de " + S.nome + ", " + S.sec;
+  $("r-secundario").textContent = "O padrão " + S.de + " também aparece em ti, " + S.sec;
   $("r-ponte").textContent = P.ponte;
 
   // Bloco de venda com as respostas dela às perguntas 19 e 20
@@ -960,7 +960,7 @@ function desenhaResultado(){
   $("v-medo").textContent = "\u201C" + medo.replace(/\.$/, "") + "\u201D";
 
   const url = new URL(LINK_CHECKOUT, location.href);
-  url.searchParams.set("perfil", P.nome.toLowerCase());
+  url.searchParams.set("perfil", P.nome.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""));
   // passa os UTMs do quiz para a Hotmart, para saberes de onde veio cada venda
   Object.entries(UTM).forEach(([k,v]) => { if (v) url.searchParams.set(k, v); });
   document.querySelectorAll(".js-checkout").forEach(a => a.href = url.toString());
@@ -983,7 +983,7 @@ $("btnPdf").addEventListener("click", () => {
 });
 
 $("btnPartilhar").addEventListener("click", async () => {
-  const texto = "Descobri que sou a " + PERFIS[resultado.dom].nome + ". E tu?";
+  const texto = "Descobri o padrão que mais me sabota: " + PERFIS[resultado.dom].art + ". E tu?";
   const link = location.origin + location.pathname;
   if (navigator.share){
     try { await navigator.share({title:"Descobre o que te está a sabotar", text:texto, url:link}); } catch(_){}
