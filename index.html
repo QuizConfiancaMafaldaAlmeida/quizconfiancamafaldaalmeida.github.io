@@ -187,13 +187,23 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .opcoes{list-style:none;border-top:1px solid var(--filete);align-self:start}
 .opcao{position:relative;display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:center;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--filete);padding:22px 14px 22px 10px;font-size:1.08rem;line-height:1.5;cursor:pointer;transition:background .25s,color .25s;-webkit-tap-highlight-color:transparent}
 .letra{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(128,0,32,.3);border-radius:50%;font-size:.72rem;font-weight:600;letter-spacing:0;color:var(--rosa-escuro);transition:background .25s,color .25s,border-color .25s}
+/* Hover: um véu bordô varre da esquerda, a linha lateral cresce, a letra enche e o texto avança 6px.
+   Só transform e opacity, para ficar fluido. */
+.opcao::before{content:"";position:absolute;inset:0;background:rgba(128,0,32,.07);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.22,.61,.36,1);z-index:0}
+.opcao::after{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:3px;background:var(--bordo);transform:scaleY(0);transition:transform .35s var(--ease);z-index:1}
+.opcao > span{position:relative;z-index:1}
+.opcao > span:last-child{transition:transform .35s var(--ease),color .25s}
 @media (hover:hover){
-  .opcao:hover{background:rgba(128,0,32,.04)}
-  .opcao:hover .letra{border-color:var(--rosa-escuro)}
+  .opcao:hover::before{transform:scaleX(1)}
+  .opcao:hover::after{transform:scaleY(1)}
+  .opcao:hover .letra{background:var(--bordo);border-color:var(--bordo);color:#fff}
+  .opcao:hover > span:last-child{transform:translateX(6px);color:var(--bordo)}
 }
-.opcao.escolhida{background:rgba(128,0,32,.06)}
+.opcao:focus-visible::before{transform:scaleX(1)}
+.opcao.escolhida::before{transform:scaleX(1);background:rgba(128,0,32,.1)}
+.opcao.escolhida::after{transform:scaleY(1)}
 .opcao.escolhida .letra{background:var(--bordo);border-color:var(--bordo);color:#fff}   /* 10.8:1 */
-.opcao.escolhida::after{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:2px;background:var(--rosa)}
+.opcao.escolhida > span:last-child{transform:translateX(6px)}
 .opcoes.bloqueada .opcao{pointer-events:none}
 .troca{animation:troca .55s var(--ease) both}
 @keyframes troca{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
