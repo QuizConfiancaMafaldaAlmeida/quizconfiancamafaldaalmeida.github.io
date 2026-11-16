@@ -223,9 +223,11 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .res-topo{background:var(--tinta);color:#fff;padding:28px 0 clamp(56px,8vw,96px)}
 .res-topo .marca{margin-bottom:clamp(48px,8vw,88px)}
 .res-grelha{display:grid;gap:44px;align-items:end}
+/* O nome do perfil mede-se pela largura da coluna: "PERFECCIONISTA" cabe sempre numa linha */
+.res-cab{container-type:inline-size;min-width:0}
 .res-topo .eyebrow{color:var(--rosa)}
 .perfil-titulo{margin:18px 0 0;font-size:clamp(1.9rem,5vw,3rem);line-height:1.1;color:#fff}
-.perfil-titulo .nome-perfil{display:block;font-family:var(--sans);font-style:normal;font-weight:600;font-size:clamp(2rem,7.4vw,4.4rem);line-height:1.05;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-top:12px;word-break:break-word}
+.perfil-titulo .nome-perfil{display:block;font-family:var(--sans);font-style:normal;font-weight:600;font-size:clamp(1.4rem,6.4vw,2.6rem);font-size:clamp(1.4rem,7.4cqi,3.4rem);line-height:1.1;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-top:12px;overflow-wrap:normal;word-break:normal}
 .perfil-titulo .nome-perfil b{font-weight:600;color:var(--rosa)}
 .espelho{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.45rem);line-height:1.5;color:rgba(255,255,255,.8);margin-top:28px;max-width:34ch}
 
@@ -405,7 +407,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
     <div class="res-largo">
       <span class="marca">MAF<b>A</b>LDA<br><strong>ALMEIDA</strong><small>Liderança &amp; Poder Pessoal</small></span>
       <div class="res-grelha">
-        <div class="revela">
+        <div class="revela res-cab">
           <p class="eyebrow">O teu resultado</p>
           <h2 class="perfil-titulo" id="r-titulo"></h2>
           <p class="espelho" id="r-espelho"></p>
