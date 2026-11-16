@@ -106,6 +106,13 @@ img{display:block;max-width:100%}
 .marca strong{font-weight:600;letter-spacing:.34em}
 .marca small{display:block;font-size:.5rem;letter-spacing:.3em;color:var(--rosa);margin-top:5px;font-weight:600}
 
+/* ---------- Logo oficial (PNG transparente: logo-claro sobre preto, logo-escuro sobre claro) ---------- */
+.logo{display:block;height:auto}
+.logo-capa{width:clamp(130px,16vw,180px)}
+.logo-topo{width:118px}
+.logo-res{width:clamp(130px,14vw,170px);margin-bottom:clamp(48px,8vw,88px)}
+.print-only{display:none}
+
 /* ---------- Tipografia ---------- */
 .eyebrow{display:flex;align-items:center;gap:12px;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--rosa-escuro)}
 .eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
@@ -329,8 +336,8 @@ em{font-style:italic;color:var(--rosa-escuro)}
   .escuro,.rodape,.quiz-topo{display:none!important}
   .revela{opacity:1!important;transform:none!important}
   .res-topo{background:#fff!important;color:var(--tinta)!important;padding:0 0 18px!important;border-bottom:1px solid var(--filete)}
-  .res-topo .marca{margin-bottom:28px!important}
-  .res-topo .marca strong,.res-topo .marca{color:var(--tinta)!important}
+  .ecra-only{display:none!important}
+  .print-only{display:block!important;margin-bottom:28px!important}
   .perfil-titulo,.perfil-titulo .nome-perfil{color:var(--tinta)!important}
   .perfil-titulo .nome-perfil{font-size:2rem!important}
   .espelho{color:#333!important;max-width:none!important}
@@ -363,7 +370,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
 <section id="capa" class="ecra ativo" aria-labelledby="t-capa">
   <div class="capa-foto"><img id="fotoCapa" src="mafalda.jpg" alt="" fetchpriority="high"></div>
   <div class="capa-topo">
-    <span class="marca" aria-label="Mafalda Almeida, Liderança e Poder Pessoal">MAF<b>A</b>LDA<br><strong>ALMEIDA</strong><small>Liderança &amp; Poder Pessoal</small></span>
+    <img class="logo logo-capa" src="logo-claro.png" width="634" height="243" alt="Mafalda Almeida, Liderança e Poder Pessoal">
   </div>
   <div class="miolo capa-texto">
     <p class="eyebrow">Avaliação · 5 minutos</p>
@@ -378,7 +385,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
 <section id="quiz" class="ecra" aria-live="polite">
   <div class="quiz-topo">
     <div class="res-largo">
-      <span class="marca" aria-label="Mafalda Almeida">MAF<b>A</b>LDA<br><strong>ALMEIDA</strong></span>
+      <img class="logo logo-topo" src="logo-escuro.png" width="634" height="243" alt="Mafalda Almeida, Liderança e Poder Pessoal">
       <div class="topo-dir">
         <button class="voltar" id="btnVoltar" hidden>← Voltar</button>
         <span class="contador" id="contador"><b>01</b> / 20</span>
@@ -446,7 +453,7 @@ em{font-style:italic;color:var(--rosa-escuro)}
 <section id="resultado" class="ecra">
   <header class="res-topo">
     <div class="res-largo">
-      <span class="marca">MAF<b>A</b>LDA<br><strong>ALMEIDA</strong><small>Liderança &amp; Poder Pessoal</small></span>
+      <img class="logo logo-res ecra-only" src="logo-claro.png" width="634" height="243" alt="Mafalda Almeida, Liderança e Poder Pessoal"><img class="logo logo-res print-only" src="logo-escuro.png" width="634" height="243" alt="">
       <div class="res-grelha">
         <div class="revela res-cab">
           <p class="eyebrow">O teu resultado</p>
