@@ -334,10 +334,16 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .desejo::before{content:"\201C";color:var(--rosa)}
 .desejo::after{content:"\201D";color:var(--rosa)}
 .v-ponte{color:rgba(255,255,255,.84);max-width:46ch}
-.oferta{padding:36px 28px;border:1px solid rgba(217,138,156,.5);border-radius:4px;text-align:center;background:rgba(255,255,255,.02)}
-.oferta .preco-rotulo{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px}
-.oferta-nome{font-family:var(--sans);font-weight:600;font-size:clamp(1.05rem,2vw,1.3rem);letter-spacing:.14em;text-transform:uppercase;line-height:1.35;margin-bottom:28px}
-.oferta-nome b{color:var(--rosa);font-weight:600}
+.oferta{padding:40px 28px 30px;border:0;border-top:6px solid var(--bordo);border-radius:6px;text-align:center;background:#fff;color:#0F0F0F;box-shadow:0 0 0 1px rgba(217,138,156,.35),0 30px 90px -20px rgba(128,0,32,.75)}
+.oferta .preco-rotulo{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bordo);font-weight:600;margin-bottom:10px}
+.oferta-nome{font-family:var(--sans);font-weight:700;font-size:clamp(1.1rem,2vw,1.35rem);letter-spacing:.12em;text-transform:uppercase;line-height:1.35;margin-bottom:28px;color:#0F0F0F}
+.oferta-nome b{color:var(--bordo);font-weight:700}
+.oferta .btn-rosa{animation:pulso 2.4s ease-out infinite;box-shadow:0 10px 30px -8px rgba(128,0,32,.6)}
+.oferta .btn-rosa::before{background:#0F0F0F}
+.oferta .btn-rosa:hover{color:#fff;animation:none}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(128,0,32,.45),0 10px 30px -8px rgba(128,0,32,.6)}70%{box-shadow:0 0 0 16px rgba(128,0,32,0),0 10px 30px -8px rgba(128,0,32,.6)}100%{box-shadow:0 0 0 0 rgba(128,0,32,0),0 10px 30px -8px rgba(128,0,32,.6)}}
+@media (prefers-reduced-motion:reduce){.oferta .btn-rosa{animation:none}}
+.oferta .seguro{display:flex;align-items:center;justify-content:center;gap:6px;color:#5a5a5a}
 .oferta .preco{font-family:var(--serif);font-size:3rem;line-height:1.1;margin:-10px 0 24px}
 .oferta .btn{min-height:62px;font-size:1rem;letter-spacing:.01em;text-transform:none;padding:16px 22px}
 .seguro{margin-top:14px;font-size:.78rem;color:rgba(255,255,255,.5)}
@@ -559,10 +565,10 @@ em{font-style:italic;color:var(--rosa-escuro)}
             <p class="oferta-nome">Reforça a tua confiança em <b>21 dias</b></p>
             <p class="preco" id="preco" hidden></p>
             <a class="btn btn-rosa js-checkout" id="btnCheckout" href="#">Quero reforçar a minha confiança <span class="seta" aria-hidden="true">→</span></a>
-            <p class="seguro">Pagamento seguro através da Hotmart.</p>
-            <p class="links-discretos"><button class="partilhar" id="btnPartilhar" type="button">Partilhar o meu resultado</button><span aria-hidden="true">·</span><button class="partilhar" id="btnPdf" type="button">Guardar em PDF</button></p>
-            <p class="aviso-copia" id="avisoCopia" aria-live="polite"></p>
+            <p class="seguro"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Pagamento seguro através da Hotmart</p>
           </div>
+          <p class="links-discretos"><button class="partilhar" id="btnPartilhar" type="button">Partilhar o meu resultado</button><span aria-hidden="true">·</span><button class="partilhar" id="btnPdf" type="button">Guardar em PDF</button></p>
+          <p class="aviso-copia" id="avisoCopia" aria-live="polite"></p>
           <div class="viver revela" id="blocoViver">
             <p class="eyebrow">Desafio de 21 dias</p>
             <h2>O que vais viver nos <em>21 dias.</em></h2>
