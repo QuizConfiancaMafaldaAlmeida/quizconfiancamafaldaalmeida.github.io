@@ -291,7 +291,13 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .custos{display:grid;gap:16px}
 .cta-meio{margin-top:clamp(40px,6vw,64px);max-width:560px}
 .cta-meio p{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.4;margin-bottom:22px}
-@media print{.cta-meio{display:none!important}}
+.barra-compra{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:14px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:#0F0F0F;border-top:1px solid rgba(255,255,255,.1);transform:translateY(110%);transition:transform .35s var(--ease)}
+.barra-compra.visivel{transform:none}
+.barra-compra p{color:#fff;font-size:.9rem;white-space:nowrap}
+.barra-compra b{color:var(--rosa)}
+.barra-compra .btn{min-height:48px;padding:12px 20px;font-size:.78rem}
+@media (min-width:900px){.barra-compra{display:none}}
+@media print{.cta-meio,.barra-compra{display:none!important}}
 .custo{padding:26px 24px 28px;background:#fff;border:1px solid var(--filete);border-top:2px solid var(--rosa);border-radius:2px 2px 4px 4px}
 .custo span{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--rosa-escuro);margin-bottom:12px}
 .custo p{font-size:1.05rem;line-height:1.55;color:var(--tinta)}
@@ -585,6 +591,10 @@ em{font-style:italic;color:var(--rosa-escuro)}
     <p><strong>Avaliação criada por Mafalda Almeida</strong>, Liderança &amp; Poder Pessoal.</p>
     <p>Quando sentires que é o momento: desafio <em>Reforça a tua confiança em 21 dias</em>, em <span id="printLink"></span></p>
   </div>
+  <div class="barra-compra" id="barraCompra" aria-hidden="true">
+    <p>Desafio <b>21 dias</b></p>
+    <a class="btn btn-rosa js-checkout" href="#" tabindex="-1">Quero começar <span class="seta" aria-hidden="true">→</span></a>
+  </div>
   <div class="assinatura-final"><img class="logo-mafalda" src="logo-mafalda.png" width="634" height="243" alt="Mafalda Almeida, Liderança e Poder Pessoal" loading="lazy"></div>
   <footer class="rodape">© <span id="ano"></span> Mafalda Almeida · Design e desenvolvimento: <a class="assinatura" href="https://www.instagram.com/ogrupocado/" target="_blank" rel="noopener">Grupo Cado</a></footer>
 </section>
@@ -598,7 +608,7 @@ const PRECO          = "";                               // vazio = o preço nã
 const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzlu6sH3JHWeolZNuKnUFbVLVlaxUVPlER1bt5vmVoNB-p0Tg-tr4FvEkyG9OJJV1_ttQ/exec";                              // URL do Web App (termina em /exec)
 const NOME_COACH     = "Mafalda Almeida";
 const FOTO_COACH     = "mafalda.jpg";                    // caminho ou URL da foto
-const BIO_COACH      = "Coach executiva, mentora e oradora internacional, com certificação em Liderança pela Universidade de Oxford. É docente na Pós-Graduação de Empreendedorismo e Negócios da Universidade Europeia, mentora de negócios na Nova School of Business and Economics e autora de “Veja em Si a Melhor Mulher do Mundo” e “Torne-se Insubstituível”.";
+const BIO_COACH      = "Coach executiva e oradora internacional, certificada em Liderança pela Universidade de Oxford, docente na Universidade Europeia e autora de “Veja em Si a Melhor Mulher do Mundo” e “Torne-se Insubstituível”.";
 const PIXEL_ID       = "";                               // ID do Meta Pixel (vazio = desligado)
 // Vazio = o bloco "O que vais viver nos 21 dias" fica escondido. Para o mostrar, põe 4 a 5 frases, ex.:
 // const O_QUE_VAIS_VIVER = ["Primeiro ponto.", "Segundo ponto."];
@@ -958,6 +968,18 @@ document.querySelectorAll(".js-checkout").forEach(a => a.addEventListener("click
   envia({tipo:"checkout", id:leadId, clicou_checkout:"sim"});
   pixel("InitiateCheckout", {content_name:"Reforça a tua confiança em 21 dias", content_category: resultado ? PERFIS[resultado.dom].nome : ""});
 }));
+
+/* Barra de compra fixa (telemóvel): aparece depois do topo do resultado e some quando chega a oferta */
+addEventListener("scroll", () => {
+  if (!$("resultado").classList.contains("ativo")) return;
+  const topo = document.querySelector(".res-topo").getBoundingClientRect().bottom;
+  const venda = document.querySelector("#resultado .escuro").getBoundingClientRect().top;
+  const mostrar = topo < 0 && venda > innerHeight;
+  const b = $("barraCompra");
+  b.classList.toggle("visivel", mostrar);
+  b.setAttribute("aria-hidden", mostrar ? "false" : "true");
+  b.querySelector("a").tabIndex = mostrar ? 0 : -1;
+}, {passive:true});
 
 /* PDF: abre o "Guardar como PDF" do navegador com um nome de ficheiro bonito */
 $("btnPdf").addEventListener("click", () => {
