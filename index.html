@@ -289,6 +289,9 @@ em{font-style:italic;color:var(--rosa-escuro)}
 .ecos-intro{display:none}
 
 .custos{display:grid;gap:16px}
+.cta-meio{margin-top:clamp(40px,6vw,64px);max-width:560px}
+.cta-meio p{font-family:var(--serif);font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.4;margin-bottom:22px}
+@media print{.cta-meio{display:none!important}}
 .custo{padding:26px 24px 28px;background:#fff;border:1px solid var(--filete);border-top:2px solid var(--rosa);border-radius:2px 2px 4px 4px}
 .custo span{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--rosa-escuro);margin-bottom:12px}
 .custo p{font-size:1.05rem;line-height:1.55;color:var(--tinta)}
@@ -520,30 +523,14 @@ em{font-style:italic;color:var(--rosa-escuro)}
         <p class="citacao">Isto não é quem tu és. É um padrão que aprendeste para te protegeres, <em>e os padrões mudam-se.</em></p>
       </div>
 
-      <div class="bloco-r revela" id="b-respostas">
-        <p class="eyebrow">Escolheste frases como estas</p>
-        <p class="ecos-intro"></p>
-        <ul class="ecos" id="r-respostas"></ul>
-      </div>
-
       <div class="bloco-r revela">
-        <p class="eyebrow">O que isto te pode estar a custar</p>
+        <p class="eyebrow">O que este padrão já te está a custar</p>
         <div class="custos" id="r-custos"></div>
       </div>
-    </div>
 
-    <div class="faixa-perguntas perguntas-ti">
-      <div class="res-largo revela">
-        <p class="eyebrow">Três perguntas para ti</p>
-        <ol id="r-perguntas"></ol>
-        <p class="nota-ti">Não precisas de responder. Repara só no que sentiste.</p>
-      </div>
-    </div>
-
-    <div class="res-largo">
-      <div class="bloco-r revela forca-grelha">
-        <div class="forca-cartao"><span>A tua força</span><p id="r-forca"></p></div>
-        <div class="forca-cartao secundario"><span>O teu segundo padrão</span><p id="r-secundario"></p></div>
+      <div class="cta-meio revela">
+        <p>Quanto mais tempo este padrão fica, mais ele decide por ti. Podes começar a mudá-lo hoje.</p>
+        <a class="btn btn-rosa js-checkout" href="#">Quero mudar isto em 21 dias <span class="seta" aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -950,24 +937,13 @@ function desenhaResultado(){
     const p = document.createElement("p"); p.textContent = txt;
     c.append(s, p); cx.appendChild(c);
   });
-  const ol = $("r-perguntas"); ol.innerHTML = "";
-  X.perguntas.forEach(q => { const li = document.createElement("li"); li.textContent = q; ol.appendChild(li); });
-  // Até 3 respostas dela que apontaram para o padrão dominante (sem a pergunta final, usada no bloco de venda)
-  const ecos = respostas.slice(0, -1).map((c, i) => c === dom ? PERGUNTAS[i].o[c] : null).filter(Boolean);
-  const ul = $("r-respostas"); ul.innerHTML = "";
-  [ecos[0], ecos[ecos.length - 1]]
-    .filter((v, i, arr) => v && arr.indexOf(v) === i)
-    .forEach(t => { const li = document.createElement("li"); li.textContent = t.replace(/^\u201C|\u201D$/g, ""); ul.appendChild(li); });
-  $("b-respostas").hidden = !ul.children.length;
-  $("r-forca").textContent = P.forca;
-  $("r-secundario").textContent = "O padrão " + S.de + " também aparece em ti, " + S.sec;
   $("r-ponte").textContent = P.ponte;
 
   // Bloco de venda com as respostas dela às perguntas 19 e 20
   const n = PERGUNTAS.length;
   const desejo = PERGUNTAS[n-1].o[respostas[n-1]] || "";
   const medo = PERGUNTAS[n-2].o[respostas[n-2]] || "";
-  $("v-titulo").textContent = resultado.nome + ", este padrão não tem de te acompanhar para sempre.";
+  $("v-titulo").textContent = resultado.nome + ", este padrão não tem de decidir por ti nem mais um ano.";
   $("v-desejo").textContent = desejo.replace(/\.$/, "");
   $("v-medo").textContent = "\u201C" + medo.replace(/\.$/, "") + "\u201D";
 
